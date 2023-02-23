@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 RUN apt-get install python3 -y
 RUN set -xe \
     && apt-get update -y \
@@ -12,6 +12,8 @@ RUN apt-get install python3-flask -y
 
 # Copy repo to container
 COPY model.py /app/
+COPY api.py /app/
+COPY app.py /app/
 COPY requirements.txt /app/
 COPY best_model.hdf5 /app/
 
